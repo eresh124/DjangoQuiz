@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'home.html' %}
+<form method="Post" action="play-quiz-next">
+{%csrf_token%}
+<div id="countdowntimer"></div>
+{% for q in sq %}
+    <input type="text"id="userTakenTime" value="">
+    <input type="hidden" name="question" value="{{ q.id}}">
+    <input type="hidden" name="correct_answer" value="{{ q.correct_answer}}">
+    <h1>{{ q.question_text }}</h1><br>
+    <input type="radio" name="option" value="{{ q.option1 }}">{{ q.option1 }}<br>
+    <input type="radio" name="option" value="{{ q.option2 }}">{{ q.option2 }}<br>
+    <input type="radio" name="option" value="{{ q.option3 }}">{{ q.option3 }}<br>
+    <input type="radio" name="option" value="{{ q.option4 }}">{{ q.option4 }}<br>
+
+{% endfor %}
+<input type="submit" value="Next">
+
+</form>
+<script type="text/javascript">
+    var timeleft = 10;
+    var quizTimer = setInterval(function () {
+        timeleft--;
+        document.getElementById("countdowntimer").textContent = timeleft;
+        document.getElementById("userTakenTime").value = timeleft;
+        var count =document.getElementById("userTakenTime").value
+
+
+        if (timeleft <= 0)
+
+            clearInterval(quizTimer);
+
+    },1000);
+</script>
+
+</body>
+</html>

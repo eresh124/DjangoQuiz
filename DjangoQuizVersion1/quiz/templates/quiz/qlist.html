@@ -1,0 +1,8 @@
+{% extends "home.html"%}
+
+{% block content %}
+    <h2> Question Listttt</h2>
+        {% for q in get_questions %}
+            {{ q.category }}<br>
+        {% endfor %}
+{% endblock %}

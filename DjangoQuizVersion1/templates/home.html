@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>#}
+
+</head>
+<body>
+
+{#{% include 'common.html' %}#}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">HamroQuiz</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Contact Us</a></li>
+        <li>
+
+            {% if user.is_authenticated %}
+                <p style="color: white">  Welcome{{ user }}</p>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else%}
+                <p style="color: white"> Welcome{{ user }}</p>
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </li>
+
+
+    </ul>
+  </div>
+</nav>
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            </span>Choose Category</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                {% for qusn in categories %}
+                                {% for cat in qusn %}
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="/quiz/play-quiz?category={{ cat }}">{{ cat }}</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9">
+            <div class="well">
+                <h1>
+                    Welcome to Quiz APP</h1>
+                TestYourSelf
+            </div>
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">Â© 2018 Copyright:
+    <a>HamroQuiz</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</body>
+</html>
